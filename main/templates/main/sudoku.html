@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudoku</title>
+<style>
+body { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background: linear-gradient(120deg, #2b6cb0, #805ad5);; color:white; font-family:"Segoe UI",sans-serif; }
+h1 { margin-bottom:20px; }
+table { border-collapse:collapse; background:#16213e; border-radius:10px; }
+td { width:50px; height:50px; text-align:center; border:1px solid #0f3460; }
+input { width:48px; height:48px; border:none; background:transparent; color:white; font-size:1.2rem; text-align:center; }
+input:disabled { color:#ff5c7a; }
+button { margin:10px; padding:10px 20px; background:#e94560; border:none; color:white; border-radius:10px; cursor:pointer; transition:0.3s; }
+button:hover { background:#ff5c7a; }
+#message { font-size:1.3rem; margin-top:15px; }
+td:nth-child(3n) { border-right:2px solid #e94560; }
+tr:nth-child(3n) td { border-bottom:2px solid #e94560; }
+</style>
+</head>
+<body>
+
+<h1>Sudoku — poziom {{ difficulty }}</h1>
+
+<table id="sudoku-table">
+{% for r in board %}
+<tr>
+{% for c in r %}
+<td>
+{% if c != 0 %}
+<input type="text" value="{{ c }}" disabled>
+{% else %}
+<input type="text" maxlength="1" oninput="validateInput(this)">
+{% endif %}
+</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+<div>
+<label>Poziom:
+<select id="level-select" onchange="newGame(true)">
+<option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>Łatwy</option>
+<option value="medium" {% if difficulty == 'medium' %}selected{% endif %}>Średni</option>
+<option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>Trudny</option>
+</select>
+</label>
+<button onclick="newGame(true)">Nowa gra</button>
+<button onclick="checkSolution()">Sprawdź</button>
+</div>
+
+<div id="message"></div>
+
+<script>
+const solution = {{ solution|safe }};
+
+function validateInput(input){
+    if(!/^[1-9]$/.test(input.value)) input.value='';
+    input.style.color="#00b4d8";
+}
+
+function newGame(forceReload=false){
+    if(forceReload){
+        const level=document.getElementById("level-select").value;
+        window.location.href="?new=1&level="+level;
+        return;
+    }
+    document.querySelectorAll('#sudoku-table input:not([disabled])')
+    .forEach(input=>{ input.value=''; input.style.color='white'; });
+    document.getElementById("message").textContent='';
+}
+
+function checkSolution(){
+    const rows=document.querySelectorAll("#sudoku-table tr");
+    let correct=true;
+    rows.forEach((row,i)=>{
+        const cells=row.querySelectorAll("input");
+        cells.forEach((cell,j)=>{
+            if(cell.disabled) return;
+            const val=cell.value?parseInt(cell.value):0;
+            if(val!==solution[i][j]){
+                correct=false;
+                cell.style.color="#00ff88";
+            }else{
+                cell.style.color="#00ff88";
+            }
+        });
+    });
+    const msg=document.getElementById("message");
+    msg.textContent=correct?"✅ Gratulacje! Sudoku rozwiązane poprawnie!":"❌ Popraw błędy.";
+    msg.style.color=correct?"#00ff88":"#ff5c7a";
+}
+</script>
+</body>
+</html>

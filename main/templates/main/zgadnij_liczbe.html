@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Zgadnij liczbę</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #2b6cb0, #805ad5);
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 8px;
+            border: none;
+            width: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 8px;
+            border: none;
+            background-color: #fff;
+            color: #2b6cb0;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #e9ecef;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.4em;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Zgadnij liczbę (1–100)</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="number" name="guess" required>
+        <button type="submit">Zgadnij</button>
+    </form>
+
+    <div class="message">{{ message }}</div>
+</body>
+</html>

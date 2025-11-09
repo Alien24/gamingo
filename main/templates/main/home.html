@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wybierz grę</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #2b6cb0, #805ad5);
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #e9ecef;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .game-card {
+            background-color: #000;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .game-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .game-card p {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wybierz grę</h1>
+    <div class="game-container">
+        <!-- Zgadnij liczbę -->
+        <a href="{% url 'zgadnij_liczbe' %}" class="game-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1063/1063451.png" alt="Zgadnij liczbę">
+            <p>Zgadnij liczbę</p>
+        </a>
+
+        <!-- Sudoku -->
+        <div class="game-card">
+            <a href="{% url 'sudoku' %}">sudoku</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Sudoku_przyklad.png" alt="Sudoku">
+            <p>Sudoku</p>
+        </div>
+
+        <!-- Krzyżówka -->
+        <div class="game-card disabled">
+            <img src="https://koss.ceo.org.pl/sites/koss.ceo.org.pl/files/krzyzowka-2.jpg" alt="Krzyżówka">
+            <p>Krzyżówka</p>
+        </div>
+
+        <!-- Kółko i krzyżyk -->
+        <div class="game-card">
+            <a href="{% url 'kolko_i_krzyzyk' %}">Kółko i krzyżyk</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Tic-tac-toe-game-1.png" alt="Kółko i krzyżyk">
+            <p>Kółko i krzyżyk</p>
+        </div>
+    </div>
+</body>
+</html>
