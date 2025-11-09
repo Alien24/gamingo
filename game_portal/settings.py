@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://gamingo-f5d5gwh6fvewfuh9.polandcentral-01.azurewebsites.net/',
-    'https://gamingo-f5d5gwh6fvewfuh9.polandcentral-01.scm.azurewebsites.net/',
+    'https://gamingo-f5d5gwh6fvewfuh9.scm.polandcentral-01.azurewebsites.net/',
 ]
 
 
@@ -129,3 +129,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
