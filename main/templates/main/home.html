@@ -66,16 +66,19 @@
     <h1>Wybierz grę</h1>
     <div class="game-container">
         <!-- Zgadnij liczbę -->
-        <a href="{% url 'zgadnij_liczbe' %}" class="game-card">
+        <div class="game-card">
+        <a href="{% url 'zgadnij_liczbe' %}">
             <img src="https://cdn-icons-png.flaticon.com/512/1063/1063451.png" alt="Zgadnij liczbę">
             <p>Zgadnij liczbę</p>
         </a>
+        </div>
 
         <!-- Sudoku -->
         <div class="game-card">
-            <a href="{% url 'sudoku' %}">sudoku</a>
+            <a href="{% url 'sudoku' %}">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Sudoku_przyklad.png" alt="Sudoku">
             <p>Sudoku</p>
+            </a>
         </div>
 
         <!-- Krzyżówka -->
@@ -86,9 +89,10 @@
 
         <!-- Kółko i krzyżyk -->
         <div class="game-card">
-            <a href="{% url 'kolko_i_krzyzyk' %}">Kółko i krzyżyk</a>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Tic-tac-toe-game-1.png" alt="Kółko i krzyżyk">
+            <a href="{% url 'kolko_i_krzyzyk' %}">
+            <img src="https://www.sztucznainteligencja.org.pl/wp-content/uploads/2019/08/tic-toe-300x297.png" alt="Kółko i krzyżyk">
             <p>Kółko i krzyżyk</p>
+            </a>
         </div>
     </div>
 </body>
