@@ -28,8 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://gamingo-f5d5gwh6fvewfuh9.polandcentral-01.azurewebsites.net/',
-    'https://gamingo-f5d5gwh6fvewfuh9.scm.polandcentral-01.azurewebsites.net/',
+    'https://gamingo-f5d5gwh6fvewfuh9.polandcentral-01.azurewebsites.net',
+    'https://gamingo-f5d5gwh6fvewfuh9.scm.polandcentral-01.azurewebsites.net',
 ]
 
 
