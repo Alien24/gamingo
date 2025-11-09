@@ -5,17 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sudoku</title>
 <style>
-body { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background: linear-gradient(120deg, #2b6cb0, #805ad5);; color:white; font-family:"Segoe UI",sans-serif; }
-h1 { margin-bottom:20px; }
-table { border-collapse:collapse; background:#16213e; border-radius:10px; }
-td { width:50px; height:50px; text-align:center; border:1px solid #0f3460; }
-input { width:48px; height:48px; border:none; background:transparent; color:white; font-size:1.2rem; text-align:center; }
+body {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    min-height:100vh;
+    background: linear-gradient(120deg, #2b6cb0, #805ad5);
+    color:white;
+    font-family:"Segoe UI",sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+}
+h1 { margin-bottom:20px; text-align:center; }
+table {
+    border-collapse:collapse;
+    background:#16213e;
+    border-radius:10px;
+    width:100%;
+    max-width:500px; /* maksymalna szerokość na dużych ekranach */
+}
+td {
+    border:1px solid #0f3460;
+    width:calc(100% / 9);
+    height:0;
+    padding-bottom: calc(100% / 9); /* zachowuje kwadrat */
+    position: relative;
+}
+input {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border:none;
+    background:transparent;
+    color:white;
+    font-size:1.5rem;
+    text-align:center;
+}
 input:disabled { color:#ff5c7a; }
-button { margin:10px; padding:10px 20px; background:#e94560; border:none; color:white; border-radius:10px; cursor:pointer; transition:0.3s; }
-button:hover { background:#ff5c7a; }
-#message { font-size:1.3rem; margin-top:15px; }
+
+button, select {
+    margin:5px;
+    padding:8px 15px;
+    background:#e94560;
+    border:none;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:0.3s;
+}
+button:hover, select:hover { background:#ff5c7a; }
+
+#message { font-size:1.3rem; margin-top:15px; text-align:center; }
+
 td:nth-child(3n) { border-right:2px solid #e94560; }
 tr:nth-child(3n) td { border-bottom:2px solid #e94560; }
+
+@media(max-width:400px){
+    input { font-size:1.2rem; }
+}
 </style>
 </head>
 <body>
@@ -57,7 +105,7 @@ const solution = {{ solution|safe }};
 
 function validateInput(input){
     if(!/^[1-9]$/.test(input.value)) input.value='';
-    input.style.color="#00b4d8";
+    input.style.color="#00b4d8"; // wpis użytkownika
 }
 
 function newGame(forceReload=false){
